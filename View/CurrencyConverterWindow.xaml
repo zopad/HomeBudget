@@ -1,0 +1,110 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:HomeBudget.View"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="HomeBudget.View.CurrencyConverterWindow"
+        mc:Ignorable="d"
+        Title="Valutaváltás" Height="800" Width="950"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="12"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        >
+
+    <Grid MinWidth="900">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="400" />
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="BackButton" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0" Click="BackButton_Click">
+            <Image Source="/Icons/arrow-left.png"/>
+        </Button>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <Label Grid.Row="1" VerticalAlignment="Top" BorderBrush="AliceBlue" BorderThickness="0" HorizontalAlignment="Left" Width="300" MinHeight="50" Content="Forint átváltás" VerticalContentAlignment="Center" FontSize="36" Margin="30,0,0,30" />
+            <StackPanel Orientation="Horizontal">
+                <xctk:DecimalUpDown x:Name="dudTopFrom" Width="120" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" FormatString="F2" Increment=".5" Maximum="99999.50" Minimum="0"/>
+                <ComboBox x:Name="ComboBoxTopFrom" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80"  Margin="10"/>
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Width="20" Content="=" />
+                <xctk:DecimalUpDown x:Name="dudTopTo" FormatString="F0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120"
+        Margin="10,0,0,0" Increment="5" Maximum="99999.50" Minimum="1" IsReadOnly="False"/>
+                <Label x:Name="currencyTopLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="40" Content=" HUF " Margin="10,0"/>
+            </StackPanel>
+            <RadioButton IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Valutám van, forintra váltom" Width="250" Checked="RadioButton_Checked_1"/>
+            <RadioButton VerticalAlignment="Center" HorizontalAlignment="Center" Content="Forintom van, valutára váltom" Width="250" Checked="RadioButton_Checked"/>
+
+        </StackPanel>
+        <Label Grid.Row="2" VerticalAlignment="Top" BorderBrush="AliceBlue" BorderThickness="0" HorizontalAlignment="Left" Width="300" MinHeight="50" Content="Valuta átváltás" VerticalContentAlignment="Center" FontSize="36" Margin="30,0,0,0" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <xctk:DecimalUpDown x:Name="dudFrom" HorizontalAlignment="Left" VerticalAlignment="Center"
+        Width="120" Margin="20,0,0,0" FormatString="F2" Increment=".5" Maximum="99999.50" Minimum="0.01" ValueChanged="dudFrom_ValueChanged"/>
+            <ComboBox x:Name="ComboBoxFrom" Grid.Row="1" VerticalAlignment="Center" Width="80"  Margin="10"/>
+            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Width="20" Content="=" />
+            <xctk:DecimalUpDown x:Name="dudTo" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120"
+        Margin="10,0,0,0" FormatString="F2" Increment=".5" Maximum="99999.50" Minimum="0.01" IsReadOnly="True"/>
+            <ComboBox x:Name="ComboBoxTo" VerticalAlignment="Center" HorizontalAlignment="Right" Width="80" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Label x:Name="sellBankNameLabel" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="256" Content=" FHB árfolyamán: " Margin="20,0,0,50" Height="40" FontSize="12"/>
+            <Label x:Name="buyBankNameLabel" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="256" Content=" FHB árfolyamán: " Margin="0,0,0,50" Height="40" FontSize="12"/>
+        </StackPanel>
+
+
+        <DataGrid x:Name="DataGridCurrency" Grid.Row="3"/>
+
+        <Expander Header="EUR árfolyam változása" Width="auto" Height="auto" Grid.Row="2" Grid.Column="1" IsExpanded="True">
+            <lvc:CartesianChart x:Name="topChart" Series="{Binding SeriesCollection}" LegendLocation="Right" MinHeight="200" Margin="0,5,-0.4,0.4" >
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Forint"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Időtartam" Labels="{Binding Labels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+        </Expander>
+
+        <Expander Header="Beállítások" HorizontalAlignment="Left" Height="250" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" MinWidth="300" IsExpanded="True">
+            <Grid Height="200" Width="400">
+                <Label Content="Frissítés gyakorisága:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="152"/>
+                <ComboBox x:Name="updateTimerComboBox" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,10,0,0" Width="120" SelectionChanged="updateTimerComboBox_SelectionChanged"/>
+                <CheckBox x:Name="shouldAlert" VerticalAlignment="Center" MinHeight="50" MinWidth="100" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="5,0,0,0">
+                    <TextBlock Text="Értesítést kérek, ha... " TextWrapping="Wrap" />
+                    
+                </CheckBox>
+                <ComboBox x:Name="ComboBoxAlert" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80"  Margin="10,80,0,0" SelectionChanged="ComboBoxAlert_SelectionChanged"/>
+                <Label Content=" vételi árfolyam" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,80,20,0"></Label>
+                <xctk:DecimalUpDown x:Name="dudAlert" FormatString="F0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="80"
+        Margin="10,0,0,15" Increment="5" Maximum="99999.50" Minimum="1" IsReadOnly="False"/>
+                <Label Content=" Ft felé emelkedik." Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,20,10"></Label>
+                <tb:TaskbarIcon
+            x:Name="MyNotifyIcon"
+            IconSource="/Icons/Error.ico"
+            ToolTipText="Árfolyam értesítés" />
+
+                <!-- <Button
+            x:Name="btnShowCustomBalloon"
+            Click="btnShowCustomBalloon_Click"
+            VerticalAlignment="Bottom"
+            Height="29"
+            Width="130"
+            Content="Értesítés teszt" Margin="0,30" /> -->
+            </Grid>
+
+        </Expander>
+
+    </Grid>
+</Window>

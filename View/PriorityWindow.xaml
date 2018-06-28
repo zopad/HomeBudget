@@ -1,0 +1,87 @@
+﻿<wpf:Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeBudget.View"
+        xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:dd="urn:gong-wpf-dragdrop"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid" x:Class="HomeBudget.View.PriorityWindow"
+        mc:Ignorable="d"
+        Title="Prioritások, ajánlások" Height="660" Width="800" MouseMove="Window_MouseMove">
+    <wpf:Grid Margin="2">
+        <wpf:Grid.RowDefinitions>
+            <wpf:RowDefinition Height="30" />
+            <wpf:RowDefinition Height="100*" />
+            <wpf:RowDefinition Height="30*" />
+            <wpf:RowDefinition Height="30*" />
+            <wpf:RowDefinition Height="60*" />
+        </wpf:Grid.RowDefinitions>
+        <wpf:Grid.ColumnDefinitions>
+            <wpf:ColumnDefinition Width="60*" />
+            <wpf:ColumnDefinition Width="60*" />
+            <wpf:ColumnDefinition Width="60*" />
+            <wpf:ColumnDefinition Width="60*" />
+            <wpf:ColumnDefinition Width="60*" />
+        </wpf:Grid.ColumnDefinitions>
+        <wpf:Button x:Name="BackButton" Width="75" Height="30" wpf:Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0" Click="BackButton_Click">
+            <wpf:Image Source="/Icons/arrow-left.png"/>
+        </wpf:Button>
+
+
+        <wpf:StackPanel Margin="2" wpf:Grid.Row="1">
+            <wpf:Label FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" AllowDrop="True" Content="Legfontosabb"/>
+            <wpf:ListBox wpf:ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="1" Height="320" MinHeight="30" x:Name="MustHaveListBox" ItemsSource="{wpf:Binding propListMust}"
+         dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True"/>
+        </wpf:StackPanel>
+
+        <wpf:StackPanel Margin="2" wpf:Grid.Row="1" wpf:Grid.Column="1">
+            <wpf:Label FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" AllowDrop="True" Content="Fontos"/>
+            <wpf:ListBox wpf:ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="1" Height="320" MinHeight="30" x:Name="ImportantListBox" ItemsSource="{wpf:Binding propListImportant}"
+         dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True"/>
+        </wpf:StackPanel>
+
+        <wpf:StackPanel Margin="2" wpf:Grid.Row="1" wpf:Grid.Column="2">
+            <wpf:Label FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" AllowDrop="True" Content="Extra"/>
+            <wpf:ListBox wpf:ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="ExtraListBox" Height="320" Padding="1" MinHeight="30" ItemsSource="{wpf:Binding propListExtra}"
+         dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True"/>
+        </wpf:StackPanel>
+
+        <wpf:StackPanel Margin="2" wpf:Grid.Row="1" wpf:Grid.Column="3">
+            <wpf:Label FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" AllowDrop="True" Content="Nem aktuális"/>
+            <wpf:ListBox wpf:ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="NotUsedListBox" Height="320" Padding="1" MinHeight="30" ItemsSource="{wpf:Binding propListNotUsed}"
+         dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True"/>
+        </wpf:StackPanel>
+
+        <wpf:StackPanel Margin="2" wpf:Grid.Row="1" wpf:Grid.Column="4">
+            <wpf:Label FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="Saját kategóriák"/>
+            <wpf:ListBox wpf:ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="CustomPropListBox" Height="320" Padding="1" MinHeight="30" ItemsSource="{wpf:Binding propListCustom}"
+         dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True"/>
+        </wpf:StackPanel>
+
+        
+
+        <wpf:TextBlock x:Name="WarningTextBlock" TextWrapping="WrapWithOverflow" wpf:Grid.Row="2" TextAlignment="Center" wpf:Grid.Column="3" wpf:Grid.ColumnSpan="2" 
+                   VerticalAlignment="Center" Foreground="Red" HorizontalAlignment="Center" Margin="2" FontSize="16">
+            <wpf:Run Text="Helyezd el a saját kategóriáidat valamelyik prioritási oszlopban, hogy kaphass spórolási tippeket!"/>
+        </wpf:TextBlock>
+
+        <wpf:TextBlock TextWrapping="WrapWithOverflow" wpf:Grid.Row="3" TextAlignment="Center" wpf:Grid.Column="3" wpf:Grid.ColumnSpan="2" 
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2" FontSize="14">
+            <wpf:Run Text="Tipp"/>
+            <wpf:LineBreak/>
+            <wpf:Run Text="További saját kategóriákat a Költségvetés menüben vihetsz fel."/>
+        </wpf:TextBlock>
+
+        <wpf:Button x:Name="collButton" wpf:Grid.Row="2" wpf:Grid.Column="0" wpf:Grid.ColumnSpan="2" HorizontalAlignment="Center" 
+                    Content="Megjegyzések, havi keretek megadása" Click="collButton_Click"/>
+        <wpf:ListBox x:Name="warningsListBox" Foreground="Red" FontSize="13" wpf:Grid.ColumnSpan="3" ItemsSource="{wpf:Binding warningsList}" HorizontalAlignment="Left" MinWidth="200" 
+                     ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="Auto" Grid.RowSpan="2" wpf:Grid.Row="3" VerticalAlignment="Top" Width="Auto"/>
+
+    </wpf:Grid>
+</wpf:Window>
