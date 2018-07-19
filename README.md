@@ -8,21 +8,21 @@ A monetary manager utility to encourage setting monthly budgets and staying with
 
 - prompts the user to make a list of their expenses and incomes every month
 
-[][https://raw.githubusercontent.com/zopad/HomeBudget/master/Documentation/AddBudgetScreen.png]
+![add budget](https://raw.githubusercontent.com/zopad/HomeBudget/master/Documentation/AddBudgetScreen.png)
 
 - provides statistics, charts and allows setting spending limits on categories to meet their saving goals.
 
-[][https://raw.githubusercontent.com/zopad/HomeBudget/master/Documentation/TrendsScreen.png]
+![trends](https://raw.githubusercontent.com/zopad/HomeBudget/master/Documentation/TrendsScreen.png)
 
 - features a priority system, ranking the importance of expenses 
 
-[][https://raw.githubusercontent.com/zopad/HomeBudget/master/Documentation/PrioritiesScreen.png]
+![priorities](https://raw.githubusercontent.com/zopad/HomeBudget/master/Documentation/PrioritiesScreen.png)
 
 - Expense cutback recommender
 - Warnings about sudden overspending and going over set limits 
 - An included currency exchange calculator that uses live data, 
 
-[][https://raw.githubusercontent.com/zopad/HomeBudget/master/Documentation/ValueExchange.png|alt=currency exchange]
+![currency exchange](https://raw.githubusercontent.com/zopad/HomeBudget/master/Documentation/ValueExchange.png)
 
 - can update in the background and send notifications if the wanted currency is over the wanted threshold.
 - can export to Excel
