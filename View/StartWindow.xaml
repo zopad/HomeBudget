@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudget.View"
         mc:Ignorable="d"
-        Title="Otthoni költségvetéskezelő" Height="600" Width="800"
+        Title="Otthoni költségvetéskezelő" Height="600" Width="750"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
@@ -15,21 +15,46 @@
         >
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300*" />
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="300*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="300*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="300*" />
         </Grid.RowDefinitions>
-        <Image VerticalAlignment="Top" Margin="20"  MaxWidth="80" MaxHeight="80" Source="/Icons/chart-pie.png" HorizontalAlignment="Center"></Image>
-        <Button x:Name="InputBudgetButton" Click="InputBudgetButton_Click_1" >Költségvetés felvétele</Button>
-        <Image  VerticalAlignment="Top" MaxWidth="80" MaxHeight="80" Source="/Icons/bank.png" Grid.Column="2" Margin="20" HorizontalAlignment="Center"/>
-        <Button Grid.Column="1"  Click="Button_Click">Valutaváltás, árfolyam</Button>
-        <Image VerticalAlignment="Top" MaxWidth="80" MaxHeight="80" Source="/Icons/finance.png" HorizontalAlignment="Center" Grid.Row="2"></Image>
-        <Button x:Name="chartsButton" Grid.Column="0" Grid.Row="2"  Click="chartsButton_Click" Margin="0,-50,0,0">Trendek, grafikonok</Button>
-        <Image VerticalAlignment="Top" MaxWidth="80" MaxHeight="80" Source="/Icons/triangle.png" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2"></Image>
-        <Button x:Name="priorityButton" Grid.Column="1" Grid.Row="2" Margin="0,-50,0,0" Click="priorityButton_Click">Prioritások</Button>
+       
+        
+        <Button Grid.Column="0" x:Name="InputBudgetButton"  Click="InputBudgetButton_Click_1" MinHeight="300" MaxHeight="400" MaxWidth="400">
+            <DockPanel>
+                <Image  DockPanel.Dock="Top" MaxWidth="80" MaxHeight="80" Source="/Icons/chart-pie.png" Grid.Column="2" Margin="20" HorizontalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom">Költségvetés felvétele</TextBlock>
+            </DockPanel>
+        </Button>
+
+        <Button Grid.Column="2"  Click="Button_Click" MinHeight="300" MaxHeight="400" MaxWidth="400">
+            <DockPanel>
+                <Image  DockPanel.Dock="Top" MaxWidth="80" MaxHeight="80" Source="/Icons/bank.png" Grid.Column="2" Margin="20" HorizontalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom">Valutaváltás, árfolyam</TextBlock>
+            </DockPanel>
+        </Button>
+
+        <Button Grid.Column="0" Grid.Row="2" x:Name="chartsButton"  Click="chartsButton_Click" MinHeight="300" MaxHeight="400" MaxWidth="400">
+            <DockPanel>
+                <Image  DockPanel.Dock="Top" MaxWidth="80" MaxHeight="80" Source="/Icons/finance.png" Grid.Column="2" Margin="20" HorizontalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom">Trendek, grafikonok</TextBlock>
+            </DockPanel>
+        </Button>
+
+        <Button Grid.Column="2" Grid.Row="2" x:Name="priorityButton"  Click="priorityButton_Click" MinHeight="300" MaxHeight="400" MaxWidth="400">
+            <DockPanel>
+                <Image  DockPanel.Dock="Top" MaxWidth="80" MaxHeight="80" Source="/Icons/triangle.png" Grid.Column="2" Margin="20" HorizontalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom">Prioritások</TextBlock>
+            </DockPanel>
+        </Button>
+        
+
     </Grid>
 
 </Window>
