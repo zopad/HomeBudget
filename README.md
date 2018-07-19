@@ -8,12 +8,22 @@ A monetary manager utility to encourage setting monthly budgets and staying with
 
 - prompts the user to make a list of their expenses and incomes every month
 
+[](Documentation/AddBudgetScreen.png)
+
 - provides statistics, charts and allows setting spending limits on categories to meet their saving goals.
 
-- features a priority system, ranking the importance of expenses, that works alongside the
+[](Documentation/Trends.png)
+
+- features a priority system, ranking the importance of expenses 
+
+[](Documentation/Priorities.png)
+
 - Expense cutback recommender
 - Warnings about sudden overspending and going over set limits 
 - An included currency exchange calculator that uses live data, 
+
+[](Documentation/ValueExchangeScreen.png)
+
 - can update in the background and send notifications if the wanted currency is over the wanted threshold.
 - can export to Excel
 
